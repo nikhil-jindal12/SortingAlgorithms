@@ -1,3 +1,7 @@
+/**
+ * Individual implementation for each student in the CaseCash system
+ * @author Nikhil Jindal
+ */
 public class Student {
     
     // the name of the student

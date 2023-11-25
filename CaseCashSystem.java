@@ -2,14 +2,76 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * Contains implementation for a system that keeps track of different students' campus cash
+ * @author Nikhil Jindal 
+ */
 public class CaseCashSystem {
     
     // the list of students with accounts created
     private List<Student> students = new ArrayList<Student>();
 
-    // public List<String> runSimulation(List<String> commands) {
-
-    // }
+    public List<String> runSimulation(List<String> commands) {
+        List<String> output = new ArrayList<>();
+        for (String command : commands) {
+            String[] parts = command.split(", ");
+            String action = parts[0];
+            switch (action) {
+                case "INIT":
+                    int initialBalance = Integer.parseInt(parts[2]);
+                    String initName = parts[1];
+                    boolean initSuccess = init(initName, initialBalance);
+                    output.add(String.valueOf(initSuccess));
+                    break;
+                case "GET":
+                    String getName = parts[1];
+                    output.add(String.valueOf(getBalance(getName)));
+                    break;
+                case "TRANSFER":
+                    Student stuA = null;
+                    Student stuB = null;
+                    int transferAmount = Integer.parseInt(parts[3]);
+                    for (Student student : students) {
+                        if (student.getName().equals(parts[1])) {
+                            stuA = student;
+                        }
+                        if (student.getName().equals(parts[2])) {
+                            stuB = student;
+                        }
+                    }
+                    output.add(String.valueOf(transfer(stuA, stuB, transferAmount)));
+                    break;
+                case "WITHDRAWAL":
+                    Student withdrawalStudent = null;
+                    int withdrawalAmount = Integer.parseInt(parts[2]);
+                    for (Student student : students) {
+                        if (student.getName().equals(parts[1])) {
+                            withdrawalStudent = student;
+                        }
+                    }
+                    output.add(String.valueOf(withdrawal(withdrawalStudent, withdrawalAmount)));
+                    break;
+                case "DEPOSIT":
+                    Student depositStudent = null;
+                    int depositAmount = Integer.parseInt(parts[2]);
+                    for (Student student : students) {
+                        if (student.getName().equals(parts[1])) {
+                            depositStudent = student;
+                        }
+                    }
+                    output.add(String.valueOf(deposit(depositStudent, depositAmount)));
+                    break;
+                case "SORT": 
+                    if (parts[1].equals("name")) {
+                        output.add(String.valueOf(sortName()));
+                    } else if (parts[1].equals("balance")) {
+                        output.add(String.valueOf(sortBalance()));
+                    }
+                    break;
+            }
+        }
+        return output;
+    }
 
     /**
      * Initializes a new student with the given name and initial balance
@@ -54,6 +116,24 @@ public class CaseCashSystem {
 
         // return -1 if the student does not exist
         return -1;
+    }
+
+    /**
+     * Deposits money to a student's account
+     * @param student the student to deposit money to
+     * @param amount the amount of money to deposit into the account
+     * @return false if the amount to deposit is negative
+     * @return true if the deposit was successful
+     */
+    public boolean deposit(Student student, int amount) {
+        if (amount < 0) {
+            // deposit amount cannot be negative
+            return false;
+        } else {
+            // update the student's balance
+            student.updateBalance(student.getBalance() + amount);
+            return true;
+        }
     }
 
     /**
@@ -231,31 +311,15 @@ public class CaseCashSystem {
     
     public static void main(String[] args) {
         CaseCashSystem cashSystem = new CaseCashSystem();
-        cashSystem.init("John", 100);
-        cashSystem.init("Jane", 200);
-        cashSystem.init("Bob", 300);
-        cashSystem.init("Alice", 400);
-        cashSystem.init("Charlie", 500);
-        cashSystem.init("David", 600);
-        cashSystem.init("Eve", 700);
-        cashSystem.init("Frank", 800);
-        cashSystem.init("Gina", 900);
-        cashSystem.init("Harry", 1000);
-        System.out.println(cashSystem.sortBalance());
-
-        // System.out.println(cashSystem.getBalance("John")); // 100
-        // System.out.println(cashSystem.getBalance("Jane")); // 200
-        // System.out.println(cashSystem.getBalance("Bob")); // 300
-
-        // cashSystem.transfer("John", "Jane", 50);
-        // cashSystem.transfer("Jane", "Bob", 25);
-
-        // System.out.println(cashSystem.getBalance("John")); // 50
-        // System.out.println(cashSystem.getBalance("Jane")); // 175
-        // System.out.println(cashSystem.getBalance("Bob")); // 275
-
-        // List<String> names = cashSystem.sortName();
-        // System.out.println(names); // ["Bob", "Jane", "John"]
+        String[] ins = {"INIT, Tammy, 200", "INIT, Kim, 300", "INIT, Quyen, 400", "SORT, name", "SORT, balance", "TRANSFER, Kim, Tammy, 100", "SORT, name", "SORT, balance"};
+        
+        List<String> inputs = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+            inputs.add(i, ins[i]);
+        }
+        
+        List<String> outputs = cashSystem.runSimulation(inputs);
+        System.out.println(outputs);
     
     }
 }
