@@ -80,7 +80,7 @@ public class CaseCashSystem {
      * @return false if a student with the same name already exists
      * @return true if the student has not already been created
      */
-    public boolean init(String name, int initialBalance) {
+    private boolean init(String name, int initialBalance) {
         // return false if the initial balance is less than 0
         if (initialBalance < 0) {
             return false;
@@ -106,7 +106,7 @@ public class CaseCashSystem {
      * @return the balance of the student
      * @return -1 if the student does not exist
      */
-    public int getBalance(String name) {
+    private int getBalance(String name) {
         // find the student in the list, and return their balance if they exist
         for (Student student : students) {
             if (student.getName().equals(name)) {
@@ -125,7 +125,7 @@ public class CaseCashSystem {
      * @return false if the amount to deposit is negative
      * @return true if the deposit was successful
      */
-    public boolean deposit(Student student, int amount) {
+    private boolean deposit(Student student, int amount) {
         if (amount < 0) {
             // deposit amount cannot be negative
             return false;
@@ -144,7 +144,7 @@ public class CaseCashSystem {
      * @return false if transferring money from A to B will result in a negative balance, if the transfer amount is negative, 
      * @return true if the transfer was successful
      */
-    public boolean transfer(Student studentA, Student studentB, int amount) {
+    private boolean transfer(Student studentA, Student studentB, int amount) {
         if (amount < 0 || studentA == null || studentB == null || studentA.getBalance() < amount) {
             // return false if amount is less than 0, either of the students are not found, or student A does not have the right balance
             return false;
@@ -160,7 +160,7 @@ public class CaseCashSystem {
      * Sorts all of the students' names in alphabetical order utilizing merge sort
      * @return a list of the students' names in alphabetical order
      */
-    public List<String> sortName() {
+    private List<String> sortName() {
         // update the list of students to be sorted by their names
         students = mergeSort(students);
 
@@ -176,7 +176,7 @@ public class CaseCashSystem {
      * Sorts students' names in order of their balance utilizing quick sort (low to high)
      * @return a list of the students' names in order of their balance
      */
-    public List<String> sortBalance() {
+    private List<String> sortBalance() {
         // update the list of students to be sorted by their account balance
         quickSort(students, 0, students.size() - 1);
 
@@ -195,7 +195,7 @@ public class CaseCashSystem {
      * @return false if the amount to withdraw is negative or greater than the amount in the student's account
      * @return true if the withdrawal was successful and the student's account was updated
      */
-    public boolean withdrawal(Student student, int amount) {
+    private boolean withdrawal(Student student, int amount) {
         if (student == null || amount < 0 || student.getBalance() < amount) {
             // return false if the student is not found, the amount to withdraw is negative, or the student does not have the right balance
             return false;
