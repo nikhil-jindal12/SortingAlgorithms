@@ -309,18 +309,5 @@ public class CaseCashSystem {
         return i + 1;
     }
     
-    public static void main(String[] args) {
-        CaseCashSystem cashSystem = new CaseCashSystem();
-        String[] ins = {"INIT, Tammy, 200", "INIT, Kim, 300", "INIT, Quyen, 400", "SORT, name", "SORT, balance", "TRANSFER, Kim, Tammy, 100", "SORT, name", "SORT, balance"};
-        
-        List<String> inputs = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            inputs.add(i, ins[i]);
-        }
-        
-        List<String> outputs = cashSystem.runSimulation(inputs);
-        System.out.println(outputs);
-    
-    }
 }
 
