@@ -80,7 +80,7 @@ public class CaseCashSystem {
      * @return false if a student with the same name already exists
      * @return true if the student has not already been created
      */
-    private boolean init(String name, int initialBalance) {
+    public boolean init(String name, int initialBalance) {
         // return false if the initial balance is less than 0
         if (initialBalance < 0) {
             return false;
@@ -106,7 +106,7 @@ public class CaseCashSystem {
      * @return the balance of the student
      * @return -1 if the student does not exist
      */
-    private int getBalance(String name) {
+    public int getBalance(String name) {
         // find the student in the list, and return their balance if they exist
         for (Student student : students) {
             if (student.getName().equals(name)) {
@@ -125,7 +125,7 @@ public class CaseCashSystem {
      * @return false if the amount to deposit is negative
      * @return true if the deposit was successful
      */
-    private boolean deposit(Student student, int amount) {
+    public boolean deposit(Student student, int amount) {
         if (amount < 0) {
             // deposit amount cannot be negative
             return false;
@@ -144,7 +144,7 @@ public class CaseCashSystem {
      * @return false if transferring money from A to B will result in a negative balance, if the transfer amount is negative, 
      * @return true if the transfer was successful
      */
-    private boolean transfer(Student studentA, Student studentB, int amount) {
+    public boolean transfer(Student studentA, Student studentB, int amount) {
         if (amount < 0 || studentA == null || studentB == null || studentA.getBalance() < amount) {
             // return false if amount is less than 0, either of the students are not found, or student A does not have the right balance
             return false;
@@ -160,7 +160,7 @@ public class CaseCashSystem {
      * Sorts all of the students' names in alphabetical order utilizing merge sort
      * @return a list of the students' names in alphabetical order
      */
-    private List<String> sortName() {
+    public List<String> sortName() {
         // update the list of students to be sorted by their names
         students = mergeSort(students);
 
@@ -176,7 +176,7 @@ public class CaseCashSystem {
      * Sorts students' names in order of their balance utilizing quick sort (low to high)
      * @return a list of the students' names in order of their balance
      */
-    private List<String> sortBalance() {
+    public List<String> sortBalance() {
         // update the list of students to be sorted by their account balance
         quickSort(students, 0, students.size() - 1);
 
@@ -195,7 +195,7 @@ public class CaseCashSystem {
      * @return false if the amount to withdraw is negative or greater than the amount in the student's account
      * @return true if the withdrawal was successful and the student's account was updated
      */
-    private boolean withdrawal(Student student, int amount) {
+    public boolean withdrawal(Student student, int amount) {
         if (student == null || amount < 0 || student.getBalance() < amount) {
             // return false if the student is not found, the amount to withdraw is negative, or the student does not have the right balance
             return false;
@@ -211,7 +211,7 @@ public class CaseCashSystem {
      * @param list the List of Students to sort
      * @return the sorted List of Students
      */
-    private List<Student> mergeSort(List<Student> list) {
+    public List<Student> mergeSort(List<Student> list) {
         // base case
         if (list.size() <= 1) {
             return list;
@@ -246,7 +246,7 @@ public class CaseCashSystem {
      * @param right the Right list of Students to merge
      * @return the merged List of Students
      */
-    private List<Student> merge(List<Student> left, List<Student> right) {
+    public List<Student> merge(List<Student> left, List<Student> right) {
         // create a new list to store the merged results
         List<Student> result = new ArrayList<>();
 
@@ -273,7 +273,7 @@ public class CaseCashSystem {
      * @param first the first item in the list to be sorted
      * @param last the last item in the list to be sorted
      */
-    private void quickSort(List<Student> list, int first, int last) {
+    public void quickSort(List<Student> list, int first, int last) {
         // base case: if the list has only one element, it is already sorted
         if (first < last) {
             int pivotIndex = partition(list, first, last);
@@ -289,7 +289,7 @@ public class CaseCashSystem {
      * @param last the last element in the List which is also the pivot element
      * @return the first index position
      */
-    private int partition(List<Student> list, int first, int last) {
+    public int partition(List<Student> list, int first, int last) {
         // choose the pivot element as the last element in the list
         int pivot = list.get(last).getBalance();
         int i = first - 1;
