@@ -24,7 +24,7 @@ The `CaseCashSystem.java` class has the following functionalities:
 - `boolean deposit(Student student, int amount)` - deposits CaseCash to a student's account, returning false if the deposit fails
 - `boolean transfer(Student studentA, Student studentB, int amount)` - transfers the amount of CaseCash from studentA to studentB's account, returning false if the transfer was unsuccessful or the amount was negative
 - `List<String> sortName()` - returns a list of student's names in alphabetical order using a customized implementation of **merge sort**
-- `List<String> sortBalance()` - returns a list of student's name in the order of smallest balance to largest balance in their account using a customized implemtation of **quick sort**
+- `List<String> sortBalance()` - returns a list of student's name in the order of smallest balance to largest balance in their account using a customized implementation of **quick sort**
 - `boolean withdrawal(Student student, int amount)` - removes CaseCash from a student's account, returning false if the transaction will result in a negative balance
 
 ----
@@ -43,7 +43,7 @@ Each of the bolded keywords corresponds directly to one of the methods in the `C
 
 Here is an example simulation:
 
-    List\<String> inputs = [“INIT, Tammy, 200”,
+    List<String> inputs = [“INIT, Tammy, 200”,
                             “INIT, Kim, 300”,
                             “INIT, Quyen, 400”,
                             “SORT, name”,
@@ -66,4 +66,4 @@ Here is an example simulation:
 
 ### JUnit Testing
 
-The `CaseCashSystemTest.java` class contains throrough JUnit testing for each of the methods in the `CaseCashSystem.java` class. All of the JUnit tests pass, and therefore the customized implementations of **merge sort** and **quick sort** correctly sort the student's names and balances.
+The `CaseCashSystemTest.java` class contains thorough JUnit testing for each of the methods in the `CaseCashSystem.java` class. All of the JUnit tests pass, and therefore the customized implementations of **merge sort** and **quick sort** correctly sort the student's names and balances.
